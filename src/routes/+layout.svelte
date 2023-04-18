@@ -1,31 +1,13 @@
 <script>
   import { browser } from "$app/environment";
-  let scrnWidth = 0;
-  let mobileInterfaceOn = false;
+  import { page } from "$app/stores";
   $: {
-    if (browser) {
-      if (mobileInterfaceOn && navMenuOpen) {
-        document.body.style.overflow = "hidden";
-      } else {
-        document.body.style.overflow = "auto";
-      }
-    }
-  }
-  $: {
-    console.log(scrnWidth);
-    if (scrnWidth > 600) {
-      mobileInterfaceOn = false;
-    } else {
-      mobileInterfaceOn = true;
-    }
+    console.log($page.url.pathname);
   }
   import "../app.css";
   let navMenuOpen = false;
   let navHeight = "h-14";
 
-  $: {
-    console.log(navMenuOpen);
-  }
   function toggleNavBar() {
     navMenuOpen = !navMenuOpen;
     if (navMenuOpen) {
@@ -36,7 +18,6 @@
   }
 </script>
 
-<svelte:window bind:outerWidth={scrnWidth} />
 <header class="decoration-clone z-40 flex text-center">
   <nav class=" fixed flex z-40 w-screen text-white {navHeight}  md:h-14 transition-all backdrop-blur-xl backdrop-saturate-150 text-center bg-[#1a191cbc] shadow-sm shadow-[#282828] md:flex-row flex-col">
     <div class="flex justify-between w-screen h-14">
@@ -55,17 +36,17 @@
         {/if}
       </div>
       <div class="h-14 items-center pr-4 font-sans md:flex hidden">
-        <a href="news" class="w-24 text-center text-xs hover:text-[#2997ff]">News</a>
-        <a href="docs" class="w-24 text-center text-xs hover:text-[#2997ff]">Docs</a>
-        <a href="https://github.com/InnateMC/InnateMC/releases" class="w-24 text-center text-xs hover:text-[#2997ff]">Releases</a>
-        <a href="https://github.com/InnateMC/InnateMC" class="w-24 text-center text-xs hover:text-[#2997ff]">Contribute</a>
+        <a data-routed={$page.url.pathname == "/"} href="/" class="w-24 text-center text-xs hover:text-[#2997ff] data-[routed=true]:text-[#919191]">Home</a>
+        <a data-routed={$page.url.pathname == "/news"} href="/news" class="w-24 text-center text-xs hover:text-[#2997ff] data-[routed=true]:text-[#919191]">News</a>
+        <a data-routed={$page.url.pathname == "/"} href="https://github.com/InnateMC/InnateMC/releases" class="w-24 text-center text-xs hover:text-[#2997ff]">Releases</a>
+        <a data-routed={$page.url.pathname == "/"} href="https://github.com/InnateMC/InnateMC" class="w-24 text-center text-xs hover:text-[#2997ff]">Contribute</a>
       </div>
     </div>
     {#if navMenuOpen}
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div class="h-64 items-center justify-start pr-4 font-sans md:hidden flex flex-col self-center mt-16" on:click={toggleNavBar}>
-        <a href="news" class="h-full text-center text-3xl hover:text-[#2997ff]">News</a>
-        <a href="docs" class="h-full text-center text-3xl hover:text-[#2997ff]">Docs</a>
+        <a data-routed={$page.url.pathname == "/"} href="/" class="h-full text-center text-3xl hover:text-[#2997ff] data-[routed=true]:text-[#919191]">Home</a>
+        <a data-routed={$page.url.pathname == "/news"} href="/news" class="h-full text-center text-3xl hover:text-[#2997ff] data-[routed=true]:text-[#919191]">News</a>
         <a href="https://github.com/InnateMC/InnateMC/releases" class="h-full text-center text-3xl hover:text-[#2997ff]">Releases</a>
         <a href="https://github.com/InnateMC/InnateMC" class="h-full text-center text-3xl hover:text-[#2997ff]">Contribute</a>
       </div>
@@ -78,3 +59,6 @@
 <div class="pt-16 overflow-hidden">
   <slot />
 </div>
+
+<style>
+</style>
