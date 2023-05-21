@@ -18,7 +18,7 @@
   }
 </script>
 
-<header class="decoration-clone z-40 flex text-center">
+<header class="decoration-clone z-40 flex text-center font-sans">
   <nav class=" fixed flex z-40 w-screen text-white {navHeight}  md:h-14 transition-all backdrop-blur-xl backdrop-saturate-150 text-center bg-[#1a191cbc] shadow-sm shadow-[#282828] md:flex-row flex-col">
     <div class="flex justify-between w-screen h-14">
       <a href="/" id="homelink" class="h-full" on:click={toggleNavBar}>
@@ -54,9 +54,10 @@
   </nav>
 </header>
 <div class="-z-10 fixed left-0 top-0 w-full h-full overflow-hidden">
-  <img src="logo.png" alt="background" class="absolute top-0 blur-xs h-96 w-96 saturate-150 animate-randommovement overflow-hidden select-none" />
+  <div class="absolute top-0 blur-xs h-96 w-96 saturate-150 animate-randommovement overflow-hidden select-none bg-blue-400" />
+  <div class="absolute top-0 blur-xs h-96 w-96 saturate-150 animate-randommovementDifferent overflow-hidden select-none bg-purple-700" />
 </div>
-<div class="pt-16 overflow-hidden">
+<div class="pt-28 overflow-hidden">
   <slot />
 </div>
 
